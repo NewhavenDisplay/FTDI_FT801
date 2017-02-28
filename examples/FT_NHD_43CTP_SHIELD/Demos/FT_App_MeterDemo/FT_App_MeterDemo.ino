@@ -64,7 +64,7 @@ FT_SDFile jpeg;
 FT801IMPL_SPI FTImpl(FT_CS_PIN,FT_PDN_PIN,FT_INT_PIN);
 
 
-PROGMEM char *info[] = {  "FT801 Meter Dial Application",
+PROGMEM char * const info[] = {  "FT801 Meter Dial Application",
                           "APP to demonstrate interactive Meter dial,",
                           "using Points, Track",
                           "& Stencil"
@@ -1173,7 +1173,6 @@ void loop()
 
 
 /* Nothing beyond this */
-
 
 
 

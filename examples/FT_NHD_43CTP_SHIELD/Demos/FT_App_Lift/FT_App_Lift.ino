@@ -49,7 +49,7 @@ FT801IMPL_SPI FTImpl(FT_CS_PIN,FT_PDN_PIN,FT_INT_PIN);
 
 
 
-PROGMEM FT_Fonts_t g_Gpu_Fonts[] = {
+PROGMEM const FT_Fonts_t g_Gpu_Fonts[] = {
 /* VC1 Hardware Fonts index 28*/
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,6,8,13,12,15,13,5,7,7,9,12,5,9,6,9,12,12,12,12,12,12,12,12,12,12,5,5,11,12,11,10,19,13,13,13,14,12,12,14,15,6,12,14,12,18,15,14,13,15,13,13,13,14,14,18,13,13,13,6,9,6,9,10,7,12,12,11,12,11,8,12,12,5,5,11,5,18,12,12,12,12,7,11,7,12,11,16,11,11,11,7,5,7,14,5,
 2,
@@ -611,7 +611,7 @@ int16_t linear(int16_t p1,int16_t p2,uint16_t t,uint16_t rate)
 
 /* Startup Screen Information*/ 
 
-PROGMEM char *info[] = {  "FT801 Lift Application",
+PROGMEM char * const info[] = {  "FT801 Lift Application",
                           "API to demonstrate lift application,",
                           "with FTDI logo",
                           "& date and time display"
@@ -1665,7 +1665,6 @@ void loop()
 
 
 /* Nothing beyond this */
-
 
 
 

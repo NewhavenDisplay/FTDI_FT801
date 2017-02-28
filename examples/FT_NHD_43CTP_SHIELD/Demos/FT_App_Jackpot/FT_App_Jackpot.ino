@@ -212,7 +212,7 @@ uint8_t payoutTable[]={
 };
 
 
-PROGMEM byte lineposition[] = {
+PROGMEM const byte lineposition[] = {
 	't','t','t','t','t',//0
 	't','t','t','m','b',//1
 	'm','m','m','m','m',//2
@@ -227,7 +227,7 @@ PROGMEM byte lineposition[] = {
 	'b','m','t','m','b' //11
 };
 
-PROGMEM bet_lines betLines[]={
+PROGMEM const bet_lines betLines[]={
 	{ 44, 38, 63, 50,235, 50,404, 50,0x7e,0x1e,0x9c}, //1
 	{ 46, 67, 63, 55,235, 55,404,170,0x15,0xb0,0x1a}, //2
 	{ 47,100, 63,102,235,102,404,102,0x03,0x46,0xDf}, //3
@@ -1989,7 +1989,6 @@ void loop()
 
 
 /* Nothing beyond this */
-
 
 
 

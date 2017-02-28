@@ -42,7 +42,7 @@ PROGMEM prog_uchar home_star_icon[] = {0x78,0x9C,0xE5,0x94,0xBF,0x4E,0xC2,0x40,0
 #define MAX_IMAGES  6
 char imagename[MAX_IMAGES][12] = {"autumn.jpg","daisy.jpg","empire.jpg","fred2.jpg","pencils.jpg","tulips.jpg"};					// all are wav files		
 
-PROGMEM char *info[] = {  "FT801 ImageViewer Application",
+PROGMEM char * const info[] = {  "FT801 ImageViewer Application",
                           "APP to demonstrate interactive Jpeg decode,",
                           "using Blend function, Bitmap flip,", 
                           "& Jpeg decode"

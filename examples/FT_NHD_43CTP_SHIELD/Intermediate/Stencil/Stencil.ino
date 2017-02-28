@@ -27,7 +27,7 @@
 #include "Wire.h"
 
 /* Platform specific includes */
-#include "NHD_43CTP_SHIELD"
+#include "FT_NHD_43CTP_SHIELD.h"
 
 /* Global object for FT801 Implementation */
 FT801IMPL_SPI FTImpl(FT_CS_PIN,FT_PDN_PIN,FT_INT_PIN);

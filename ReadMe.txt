@@ -13,9 +13,9 @@
 /**
 * @file                           ReadMe.txt
 * @brief                          Contains information regarding the release, version significance and testing done.
-				  Tested platform version: Arduino 1.0.4 and later
-* @version                        1.4.0
-* @date                           2015/03/27
+				  Tested platform version: Arduino 1.8.1 and later
+* @version                        1.5.0
+* @date                           2017/02/28
 *
 */
 
@@ -26,6 +26,9 @@ This document captures version significance, folder structure, testing informati
 
 Version Significance:
 -------------------------
+Version 1.5.0 (NHD) - Feb/28/2017:
+	-Updated library to compile on Arduino 1.8.1
+
 Version 1.4.0 - Mar/27/2015:
 	-Added demo application implements swipe lists, as found on tablets and mobile phones. Located in "examples\FT_VM800P43_50\Intermediate\Swipe" folder.
 

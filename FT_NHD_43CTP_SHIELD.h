@@ -41,6 +41,11 @@
 /* Driver related includes */
 //#include "SPI.h"
 
+typedef PROGMEM const unsigned char prog_uchar;
+typedef PROGMEM const char prog_char;
+typedef PROGMEM const unsigned int prog_uint16_t;
+typedef PROGMEM const unsigned long prog_uint32_t;
+
 //macros specific to platform
 
 //macros specific to FT800 hardware
