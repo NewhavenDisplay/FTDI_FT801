@@ -81,7 +81,7 @@ void Widgets()
 	xOffset = xDistBtwClocks/2;
 	yOffset = cRadius + 5;
 	
-	//display cock with blue as background color
+	//display clock with blue as background color
 	FTImpl.Cmd_BGColor( 0x0000ff);
 	FTImpl.ColorRGB(0xff,0x00,0x00);
 	FTImpl.Cmd_Clock( xOffset,yOffset,cRadius,0,10,10,5,10);//display clock with default 3d effect and the time being 10:10:05
