@@ -241,7 +241,7 @@ static void scroller_run()
   uint16_t gram_address;
 }t_imageprp;
 
-PROGMEM t_imageprp Main_Icons[10] = 
+const PROGMEM t_imageprp Main_Icons[10] = 
 {
                                         
                                         {"shirt.bin",		40,    FT_ARGB4,  FT_NEAREST,    40,    40 ,    80,   0L      }, 
@@ -373,7 +373,7 @@ typedef struct Item_Prop
 		prog_char SpinSpeed[8];	
 }Item_Properties;
 
-Item_Properties Item_Property[] PROGMEM= 
+const PROGMEM Item_Properties Item_Property[] = 
 {
 	{"Light", "Cold", "Low"},//Eco cold
 	{"Normal", "Warm", "Medium"}, //Normal

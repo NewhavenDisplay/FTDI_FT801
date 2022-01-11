@@ -53,7 +53,7 @@ int16_t CartX = 480;
 }t_imageprp;
 
 
-PROGMEM t_imageprp Main_Icons[7] = {
+const PROGMEM t_imageprp Main_Icons[7] = {
                              {"Menu.BIN",  53,  FT_RGB565,  FT_BILINEAR,    114,   76,  80*2,  0L     },    //handle 0 
                              {"BB.BIN",    50,  FT_ARGB4,   FT_NEAREST,    50,    50,  50*2,  153},    //handle 1
                              {"HB.BIN",    50,  FT_ARGB4,   FT_NEAREST,    50,    50,  50*2,  159},    //handle 2
@@ -66,7 +66,7 @@ PROGMEM t_imageprp Main_Icons[7] = {
 /*****************************************************************************/
 /* Example code to display few points at various offsets with various colors */ 
 
-PROGMEM prog_char *info[] =  { 
+prog_char *info[] =  { 
 					  "FT801 Restaurant Demo Application",
           			  "APP to demonstrate interactive Menu,",
 					  "and animation,",	 
@@ -91,7 +91,7 @@ typedef struct Item_Prop
         uint8_t ItemPriceinVal;
 }Item_Properties;
 
- Item_Properties Item_Property[14] PROGMEM= 
+const PROGMEM Item_Properties Item_Property[14] = 
 {
 	{0,0,0},//0
 	{"Espresso\0", "$3.00\0", "Italian Espresso Coffee",3},//1

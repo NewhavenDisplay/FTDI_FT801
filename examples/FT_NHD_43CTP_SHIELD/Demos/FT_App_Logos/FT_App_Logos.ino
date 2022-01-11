@@ -107,8 +107,8 @@ PROGMEM prog_uchar  sy[20] = {0x3d,0x1d,0x18,0x7f,101,0x60,0x18,0x1e,0x5f,0x9f,0
 PROGMEM prog_uchar  ss[20] = {0x04,0x05,0x06,0x07,0x05,0x05,0x08,0x08,0x0A,0x05,0x07,0x05,0x06,0x05,0x04,0x05,0x07,0x07,0x05,0x04};
 
 PROGMEM prog_uint16_t hyp[48] = {72,144,216,102,161,228,161,204,260,228,260,305,72,144,216,72,144,216,102,161,228,161,204,260,228,260,305,102,161,228,161,204,260,228,260,305,72,144,216,102,161,228,161,204,260,228,260,305};
-PROGMEM float t_can[48] = {1.0,1.0,1.0,0.707388,0.891115,0.951106,0.454487,0.707388,0.829206,0.309623,0.559604,0.707388,0.000796,0.000796,0.000796,-0.999999,-0.999999,-0.999999,-0.706262,-0.453068,-0.308108,-0.890391,-0.706262,-0.558283,-0.950613,-0.828314,-0.706262,-0.708513,-0.891837,-0.951596,-0.455905,-0.708513,-0.830095,-0.311137,-0.560923,-0.575278,-0.002389,-0.002389,-0.002389,0.705133,0.451647,0.306592,0.889665,0.705133,0.556961,0.950117,0.827421,-0.708513};
-PROGMEM float t_san[48] = {0.0,0.0,0.0,0.706825,0.453778,0.308866,0.890753,0.706825,0.558943,0.950859,0.828760,0.706825,1.000000,1.000000,1.000000,0.001593,0.001593,0.001593,0.707951,0.891476,0.951351,0.455196,0.707951,0.829651,0.310380,0.560263,0.707951,-0.705698,-0.452358,-0.307350,-0.890028,-0.705698,-0.557622,-0.950365,-0.827868,-0.817958,-0.999997,-0.999997,-0.999997,-0.709075,-0.892196,-0.951841,-0.456614,-0.709075,-0.830539,-0.311894,-0.561582,-0.705698};
+const PROGMEM float t_can[48] = {1.0,1.0,1.0,0.707388,0.891115,0.951106,0.454487,0.707388,0.829206,0.309623,0.559604,0.707388,0.000796,0.000796,0.000796,-0.999999,-0.999999,-0.999999,-0.706262,-0.453068,-0.308108,-0.890391,-0.706262,-0.558283,-0.950613,-0.828314,-0.706262,-0.708513,-0.891837,-0.951596,-0.455905,-0.708513,-0.830095,-0.311137,-0.560923,-0.575278,-0.002389,-0.002389,-0.002389,0.705133,0.451647,0.306592,0.889665,0.705133,0.556961,0.950117,0.827421,-0.708513};
+const PROGMEM float t_san[48] = {0.0,0.0,0.0,0.706825,0.453778,0.308866,0.890753,0.706825,0.558943,0.950859,0.828760,0.706825,1.000000,1.000000,1.000000,0.001593,0.001593,0.001593,0.707951,0.891476,0.951351,0.455196,0.707951,0.829651,0.310380,0.560263,0.707951,-0.705698,-0.452358,-0.307350,-0.890028,-0.705698,-0.557622,-0.950365,-0.827868,-0.817958,-0.999997,-0.999997,-0.999997,-0.709075,-0.892196,-0.951841,-0.456614,-0.709075,-0.830539,-0.311894,-0.561582,-0.705698};
 
 
 /*************************************************************************/
@@ -1067,110 +1067,117 @@ void Info()
 
 static int32_t trackval = 0;
 uint8_t Selection_Menu()
-{ 
-  uint8_t Menu=0,temp_Menu=0,rotation_flag=0,played=0,key_detected;
-  uint16_t rotation_cts = 0,scroller_vel;
-  int16_t prevth=0,currth=0,key_deteted_cts;
-sTrackTag sTracktag;
+{
+  uint8_t Menu = 0, temp_Menu = 0, rotation_flag = 0, played = 0, key_detected;
+  uint16_t rotation_cts = 0, scroller_vel;
+  int16_t prevth = 0, currth = 0, key_deteted_cts;
+  sTrackTag sTracktag;
   Menu_prp = 1;
-  Logo_Intial_setup(menu_prp,3);
-  FTImpl.Cmd_Track(240,136,1,1,1);
-  FTImpl.Cmd_Track(240,136,1,1,2);
-  FTImpl.Cmd_Track(240,136,1,1,3);
-  FTImpl.Cmd_Track(240,136,1,1,4);
-  FTImpl.Cmd_Track(240,136,1,1,5);
-  FTImpl.Cmd_Track(240,136,1,1,6);
+  Logo_Intial_setup(menu_prp, 3);
+  FTImpl.Cmd_Track(240, 136, 1, 1, 1);
+  FTImpl.Cmd_Track(240, 136, 1, 1, 2);
+  FTImpl.Cmd_Track(240, 136, 1, 1, 3);
+  FTImpl.Cmd_Track(240, 136, 1, 1, 4);
+  FTImpl.Cmd_Track(240, 136, 1, 1, 5);
+  FTImpl.Cmd_Track(240, 136, 1, 1, 6);
   FTImpl.Finish();
   do
   {
-     FTImpl.GetTrackTag(sTracktag);
+    FTImpl.GetTrackTag(sTracktag);
 
-     key_detected = sTracktag.tag; 
-     if(key_detected>0)
-     {
-       rotation_cts = 0;
-       key_deteted_cts++;
-       if(key_detected<6)
-       temp_Menu = key_detected; else temp_Menu = 0;
-       Menu = 0;
-     }   
-     if(key_detected==0)
-     {
-       if(key_deteted_cts>0&&key_deteted_cts<15)    
-       {          
-         if(!rotation_flag)
-         Menu = temp_Menu; else
-         rotation_flag = 0;
-       }    
-       key_deteted_cts = 0;
-       if(rotation_cts>100)     
-       {
-         trackval++; 
-         rotation_flag = 1;
-       }else
-       rotation_cts++;
-     }     
-     if(key_deteted_cts>15)
-     {  
-      currth = sTracktag.track/182;
-       if(prevth!=0)
-       trackval += (currth-prevth);
-       prevth = currth;
-       rotation_cts = 0;
-       rotation_flag = 0;
-     }else
-     {
-        prevth=0;    
-     }  
-     
-     static PROGMEM prog_uint32_t std[] = 
-     {
-         CMD_DLSTART,
-         CLEAR_COLOR_RGB(12,61,90),      
-         CLEAR(1,1,1),  
-         BEGIN(FT_BITMAPS),
-         SAVE_CONTEXT(),
-         BITMAP_TRANSFORM_A(128),
-         BITMAP_TRANSFORM_E(128),
-         VERTEX2II(0,0,2,0),
-         RESTORE_CONTEXT(),
-         COLOR_RGB(0,0,0),
-         TAG_MASK(1),
-         TAG(6),
-         VERTEX2II(0,0,1,0), 
-         TAG_MASK(0),
-         COLOR_RGB(255,255,255),
-         POINT_SIZE(40*16),
-     };MEMCMD(std);       
-     for(uint8_t x=1;x<6;x++)  
-     {      
-       int16_t theta = (72*x);
-       theta +=(-trackval); theta%=360; 
-       int16_t xoff = 200+(int16_t)(170*cos(theta*0.0174));
-       int16_t yoff = 80-(int16_t)(80*sin(theta*0.0174));
-       uint16_t zinout = 350-yoff;
-       xoff = xoff+((100-(100*yoff*0.0115)))/2;      
-       FTImpl.BitmapTransformA(zinout);
-       FTImpl.BitmapTransformE(zinout);
-       if(x==key_detected)
-       FTImpl.ColorRGB(150,150,150);
-       else
-       FTImpl.ColorRGB(255,255,255);
-       FTImpl.Begin(FT_BITMAPS); 
-       FTImpl.Vertex2ii(xoff,yoff,0,x-1);    
-       FTImpl.Begin(FT_POINTS); 
-       FTImpl.ColorA(0);
-       FTImpl.TagMask(1);     
-       FTImpl.Tag(x);   // 100% transparent bmp  
-       FTImpl.Vertex2f((xoff+25)*16,(yoff+25)*16);   // 100% transparent bmp 
-       FTImpl.ColorA(255);
-       FTImpl.TagMask(0);
-     } 
-     end_frame();
-     
-     FTImpl.Finish();     
-  }while(Menu==0);
-  return Menu;  
+    key_detected = sTracktag.tag;
+    if (key_detected > 0)
+    {
+      rotation_cts = 0;
+      key_deteted_cts++;
+      if (key_detected < 6)
+        temp_Menu = key_detected;
+      else
+        temp_Menu = 0;
+      Menu = 0;
+    }
+    if (key_detected == 0)
+    {
+      if (key_deteted_cts > 0 && key_deteted_cts < 15)
+      {
+        if (!rotation_flag)
+          Menu = temp_Menu;
+        else
+          rotation_flag = 0;
+      }
+      key_deteted_cts = 0;
+      if (rotation_cts > 100)
+      {
+        trackval++;
+        rotation_flag = 1;
+      }
+      else
+        rotation_cts++;
+    }
+    if (key_deteted_cts > 15)
+    {
+      currth = sTracktag.track / 182;
+      if (prevth != 0)
+        trackval += (currth - prevth);
+      prevth = currth;
+      rotation_cts = 0;
+      rotation_flag = 0;
+    }
+    else
+    {
+      prevth = 0;
+    }
+
+    static PROGMEM prog_uint32_t std[] =
+        {
+            CMD_DLSTART,
+            CLEAR_COLOR_RGB(12, 61, 90),
+            CLEAR(1, 1, 1),
+            BEGIN(FT_BITMAPS),
+            SAVE_CONTEXT(),
+            BITMAP_TRANSFORM_A(128),
+            BITMAP_TRANSFORM_E(128),
+            VERTEX2II(0, 0, 2, 0),
+            RESTORE_CONTEXT(),
+            COLOR_RGB(0, 0, 0),
+            TAG_MASK(1),
+            TAG(6),
+            VERTEX2II(0, 0, 1, 0),
+            TAG_MASK(0),
+            COLOR_RGB(255, 255, 255),
+            POINT_SIZE(40 * 16),
+        };
+    MEMCMD(std);
+    for (uint8_t x = 1; x < 6; x++)
+    {
+      int16_t theta = (72 * x);
+      theta += (-trackval);
+      theta %= 360;
+      int16_t xoff = 200 + (int16_t)(170 * cos(theta * 0.0174));
+      int16_t yoff = 80 - (int16_t)(80 * sin(theta * 0.0174));
+      uint16_t zinout = 350 - yoff;
+      xoff = xoff + ((100 - (100 * yoff * 0.0115))) / 2;
+      FTImpl.BitmapTransformA(zinout);
+      FTImpl.BitmapTransformE(zinout);
+      if (x == key_detected)
+        FTImpl.ColorRGB(150, 150, 150);
+      else
+        FTImpl.ColorRGB(255, 255, 255);
+      FTImpl.Begin(FT_BITMAPS);
+      FTImpl.Vertex2ii(xoff, yoff, 0, x - 1);
+      FTImpl.Begin(FT_POINTS);
+      FTImpl.ColorA(0);
+      FTImpl.TagMask(1);
+      FTImpl.Tag(x);                                       // 100% transparent bmp
+      FTImpl.Vertex2f((xoff + 25) * 16, (yoff + 25) * 16); // 100% transparent bmp
+      FTImpl.ColorA(255);
+      FTImpl.TagMask(0);
+    }
+    end_frame();
+
+    FTImpl.Finish();
+  } while (Menu == 0);
+  return Menu;
 }
 
 /* Api to bootup FT801, verify FT801 hardware and configure display/audio pins */

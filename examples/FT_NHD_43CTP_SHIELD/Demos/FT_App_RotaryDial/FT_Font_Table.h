@@ -5,7 +5,7 @@
  
 
  
-PROGMEM FT_Fonts_t g_Gpu_Fonts[] = {
+const PROGMEM FT_Fonts_t g_Gpu_Fonts[] = {
 
 /* VC1 Hardware Fonts index 28*/
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,6,8,13,12,15,13,5,7,7,9,12,5,9,6,9,/*48*/12,12,12,12,12,12,12,12,

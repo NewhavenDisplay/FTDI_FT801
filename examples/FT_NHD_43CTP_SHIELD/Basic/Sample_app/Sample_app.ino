@@ -109,10 +109,11 @@ int16_t TestApp_Bootup()
    delay(20);//safer side
    chipid = FTImpl.Read32(FT_ROM_CHIPID);
    /* identify the chip */
-   if(FT800_CHIPID != chipid)
+   if(FT801_CHIPID != chipid)
    {
      Serial.print("Error in chip id read ");
-     Serial.println(chipid,HEX);
+     Serial.println(chipid, HEX);
+	 return 1;
    }
    return 0;
 }
@@ -882,12 +883,13 @@ void SAMAPP_GPU_StreetMap()
 	FTImpl.DLStart();	
 	FTImpl.ClearColorRGB(236,232,224); //light gray
 	FTImpl.Clear(1, 1, 1); // clear screen
+
 	FTImpl.ColorRGB(170,157,136);//medium gray
 	FTImpl.LineWidth(63);
-	FTImpl.Call(19);//draw the streets
+	FTImpl.Call(20);//draw the streets
 	FTImpl.ColorRGB(250,250,250);//white
 	FTImpl.LineWidth(48);
-	FTImpl.Call(19);//draw the streets
+	FTImpl.Call(20);//draw the streets
 	FTImpl.ColorRGB(0,0,0);
 	FTImpl.Begin(FT_BITMAPS);
 	FTImpl.Vertex2ii(240,91,27,77);
@@ -898,7 +900,8 @@ void SAMAPP_GPU_StreetMap()
 	FTImpl.Vertex2ii(282,91,27,116);
 	FTImpl.Vertex2ii(286,91,27,46);
 	FTImpl.End();
-	//FTImpl.Display();
+	FTImpl.Display();
+	
 	FTImpl.Begin(FT_LINES);
 	FTImpl.Vertex2f(-160,-20  );
 	FTImpl.Vertex2f(320,4160  );
@@ -1631,7 +1634,7 @@ void SAMAPP_CoPro_Widget_Keys_Interactive()
 
 	   /* Check the user input and then add the characters into array */
 	   CurrTag = FTImpl.Read(REG_TOUCH_TAG);
-	   Pendown = ((FTImpl.Read32(REG_TOUCH_DIRECT_XY)>>31) & 0x01);
+	   Pendown = ((FTImpl.Read32(REG_TOUCH_SCREEN_XY)>>31) & 0x01);
 
        CurrChar = CurrTag;
        if(0 == CurrTag)
@@ -1670,7 +1673,7 @@ void SAMAPP_CoPro_Widget_Keys_Interactive()
        FTImpl.Cmd_Keys(yBtnDst, yOffset, 10*ButtonW, ButtonH, TextFont, (FT_OPT_CENTER | CurrTag), "qwertyuiop");
        FTImpl.Cmd_GradColor(0x00ffff);
        yOffset += ButtonH + yBtnDst;
-       FTImpl.Cmd_Keys(yBtnDst, yOffset, 10*ButtonW, ButtonH, TextFont, (FT_OPT_CENTER | CurrTag), "aasdfghjkl);
+       FTImpl.Cmd_Keys(yBtnDst, yOffset, 10*ButtonW, ButtonH, TextFont, (FT_OPT_CENTER | CurrTag), "aasdfghjkl");
        FTImpl.Cmd_GradColor(0xffff00);
        yOffset += ButtonH + yBtnDst;
        FTImpl.Cmd_Keys(yBtnDst, yOffset, 10*ButtonW, ButtonH, TextFont, (FT_OPT_CENTER | CurrTag), "zxcvbnm");//hilight button z
