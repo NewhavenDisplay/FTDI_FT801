@@ -14,8 +14,8 @@
 * @file                           ReadMe.txt
 * @brief                          Contains information regarding the release, version significance and testing done.
 				  Tested platform version: Arduino 1.8.1 and later
-* @version                        1.5.0
-* @date                           2017/02/28
+* @version                        1.5.1
+* @date                           2022/01/11
 *
 */
 
@@ -26,6 +26,9 @@ This document captures version significance, folder structure, testing informati
 
 Version Significance:
 -------------------------
+Version 1.5.1 (NHD) - Jan/11/2022;
+	- Merged example programs from FTDI_FT801 library on NHD website.
+
 Version 1.5.0 (NHD) - Feb/28/2017:
 	-Updated library to compile on Arduino 1.8.1
 
